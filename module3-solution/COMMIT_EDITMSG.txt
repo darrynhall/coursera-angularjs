@@ -6,6 +6,3 @@
 #
 # Changes to be committed:
 #	new file:   README.txt
-
-initial file
-
