@@ -1,8 +1,14 @@
-<h3>{{ narrow.myTitle }}</h3>
-<ol>
- <li ng-repeat="item in narrow.found">
-    (<a href="" >
-      {{ item.short_name }}</a>) {{ item.name }}
-    <button ng-click="narrow.onRemove({index: $index});">Don't want this one!</button>
-  </li>
-</ol>
+<table border=2>
+  <tr>
+    <td>Action</td>
+    <td>Name</td>
+    <td>Description</td>
+  </tr>
+  <tr ng-repeat="item in foundItems">
+    <td >
+      <button ng-click="onRemove({index:$index})" class="btn btn-primary">Don't want this one!</button>
+    </td>
+    <td>{{item.name}}</td>
+    <td>{{item.description}}</td>
+  </tr>
+</table>
