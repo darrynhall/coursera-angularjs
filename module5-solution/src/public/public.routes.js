@@ -36,8 +36,24 @@ function routeConfig ($stateProvider) {
       controller: 'RegController',
       controllerAs: 'regCtrl',
       resolve: {
-        menuCategories: ['MenuService', function (MenuService) {
-          return MenuService.getCategories();
+        menuitem: ['MenuService', 'RegistrationService', function (MenuService, RegistrationService) {
+          console.log("xxxxx " + RegistrationService.getRegInfo().menunumber);
+          if(RegistrationService.getRegInfo().menunumber !== undefined &&
+        RegistrationService.getRegInfo().menunumber !== ''){
+            console.log("xxxxx not empty");
+            MenuService.getMenuItemByShortName(RegistrationService.getRegInfo().menunumber)
+            .then(function(response){
+              RegistrationService.setMenuItem(response);
+              console.log('set reg svc menu  in routes: '+ JSON.stringify(response, null, 4));
+              console.log('set reg svc menu  in routes: '+ JSON.stringify(response.data, null, 4));
+            })
+            .catch(function(error){
+              console.log(error);
+            })
+          } else {
+            console.log("xxxxx  empty");
+            return {};
+          }
         }]
       }
     })
@@ -45,12 +61,12 @@ function routeConfig ($stateProvider) {
       url: '/signup',
       templateUrl: 'src/public/signup/signup.html',
       controller: 'MenuController',
-      controllerAs: 'menuCtrl',
-      resolve: {
-        menuCategories: ['MenuService', function (MenuService) {
-          return MenuService.getMenuItems();
-        }]
-      }
+      controllerAs: 'menuCtrl'
+      // resolve: {
+      //   menuCategories: ['MenuService', function (MenuService) {
+      //     return MenuService.getMenuItems();
+      //   }]
+      // }
     })
 
 

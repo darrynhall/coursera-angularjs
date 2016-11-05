@@ -18,10 +18,13 @@
   Last Name :   {{ regCtrl.getRegInfo().lastName }}   <br/>
   Email :   {{ regCtrl.getRegInfo().email }}    <br/>
   Phone :   {{ regCtrl.getRegInfo().phone }}    <br/>
-  Favorite Menu Item Number :    {{ regCtrl.getRegInfo().phone }}     <br/>
-  <!-- Favorite Menu Item Title :  {{ regCtrl.menuitem.title }} <br/>
-  Favorite Menu Item Description :  {{ regCtrl.menuitem.description }} <br/>
-  Favorite Menu Item Photo :  {{ regCtrl.menuitem.photo }} -->
+  Favorite Menu Item Number :    {{ regCtrl.getRegInfo().menunumber }}     <br/>
+  Favorite Menu Item Title :  {{ regCtrl.getRegInfo().menuitem.name }} <br/>
+  Favorite Menu Item Description :  {{ regCtrl.getRegInfo().menuitem.description }} <br/>
+  Favorite Menu Item Photo :  <br/>
+
+  <img ng-src="{{ regCtrl.apipath}}{{regCtrl.getRegInfo().menunumber}}.jpg"
+        style="width: 100px; height: 100px" />
 </span>
 
 

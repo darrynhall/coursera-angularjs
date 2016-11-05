@@ -4,14 +4,15 @@
 angular.module('public')
 .controller('MenuController', MenuController)
 .controller('RegController', RegController)
+//.service('MenuService', MenuService)
 .service('RegistrationService', RegistrationService);
 //, 'RegistrationService'
 
 
-MenuController.$inject = ['menuCategories', 'RegistrationService' ];
-function MenuController(menuCategories, RegistrationService) {
+MenuController.$inject = ['RegistrationService' , 'MenuService'];
+function MenuController( RegistrationService, MenuService) {
   var $ctrl = this;
-  $ctrl.menuCategories = menuCategories;
+  //$ctrl.menuCategories = menuCategories;
 
   $ctrl.firstname = '';
   $ctrl.lastname = '';
@@ -20,6 +21,8 @@ function MenuController(menuCategories, RegistrationService) {
   $ctrl.menunumber = '';
 
   $ctrl.confirmSave = false;
+
+  $ctrl.isInvalidMenuNumber = false;
 
   $ctrl.signup= function(){
       RegistrationService.setRegInfo( $ctrl.firstname ,   $ctrl.lastname,
@@ -32,23 +35,30 @@ function MenuController(menuCategories, RegistrationService) {
 
   $ctrl.isValidMenuNumber= function(){
   //  console.log("ctrl.menunumber  = " + $ctrl.menunumber );
-    console.log("$ctrl.menuCategories  = " + $ctrl.menuCategories.data );
+    //console.log("$ctrl.menuCategories  = " + $ctrl.menuCategories.data );
+
 
       return false;
   };
 
 }
 
-RegController.$inject = ['menuCategories', 'RegistrationService' ];
-function RegController(menuCategories, RegistrationService) {
+RegController.$inject = [ 'RegistrationService', 'MenuService', 'menuitem', 'ApiPath' ];
+function RegController( RegistrationService, MenuService, menuitem, ApiPath) {
   var $ctrl = this;
-  $ctrl.menuCategories = menuCategories;
+  $ctrl.menuitem = menuitem;
+  $ctrl.apipath = ApiPath + '/images/';
+//  $ctrl.menuCategories = menuCategories;
 
   $ctrl.getRegInfo = function(){
     return RegistrationService.getRegInfo();
   };
+
+//  $ctrl.menuitem = MenuService.getMenuItemByShortName($ctrl.getRegInfo().menunumber);
+
 }
 
+//RegistrationService.$inject = [ 'MenuService' ];
 function RegistrationService() {
   var service = this;
 
@@ -57,7 +67,8 @@ function RegistrationService() {
     lastName:"",
     email: "",
     phone : "",
-  menunumber : "" };
+  menunumber : "",
+ menuitem: [] };
 
    service.setRegInfo = function(pfirst, plast, pemail, pphone, pmenunumber){
     regInfo.firstName = pfirst;
@@ -65,12 +76,18 @@ function RegistrationService() {
     regInfo.email = pemail;
     regInfo.phone = pphone;
     regInfo.menunumber = pmenunumber;
+  //  regInfo.menuitem = MenuService.getMenuItemByShortName(pmenunumber);
+
   };
 
   service.getRegInfo = function(){
     return regInfo;
   };
 
+  service.setMenuItem = function(result){
+    regInfo.menuitem = result;
+    console.log('set reg svc menu item: ' + result );
+  };
 }
 
 
