@@ -1,0 +1,35 @@
+<div class="container">
+  <h2 id="menu-categories-title" >My Info  Page</h2>
+  <!-- <div class="text-center"> -->
+
+
+<span
+  ng-if="regCtrl.getRegInfo().firstName === ''" >
+  <br/>
+  Not Signed Up Yet.
+  <a ui-sref="public.signup">
+ Sign up Now!</a>
+</span>
+
+  <span ng-if="regCtrl.getRegInfo().firstName != ''" >
+  <br/>
+
+  First Name :   {{ regCtrl.getRegInfo().firstName }}    <br/>
+  Last Name :   {{ regCtrl.getRegInfo().lastName }}   <br/>
+  Email :   {{ regCtrl.getRegInfo().email }}    <br/>
+  Phone :   {{ regCtrl.getRegInfo().phone }}    <br/>
+  Favorite Menu Item Number :    {{ regCtrl.getRegInfo().menunumber }}     <br/>
+  Favorite Menu Item Title :  {{ regCtrl.getRegInfo().menuitem.name }} <br/>
+  Favorite Menu Item Description :  {{ regCtrl.getRegInfo().menuitem.description }} <br/>
+  Favorite Menu Item Photo :  <br/>
+
+  <img ng-src="{{ regCtrl.apipath}}{{regCtrl.getRegInfo().menunumber}}.jpg"
+        style="width: 100px; height: 100px" />
+</span>
+
+
+<br/><br/>
+
+
+
+</div>

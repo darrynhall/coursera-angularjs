@@ -1,0 +1,85 @@
+<div class="container">
+  <h2 id="menu-categories-title" >Sign Up Page</h2>
+  <!-- <div class="text-center"> -->
+  Enter profile info here
+
+
+  <!-- <menu-category ng-repeat="menuCategory in menuCtrl.menuCategories"
+                 category="menuCategory">
+  </menu-category> -->
+
+   <form name='signupForm' novalidate>
+  <br/>
+  First Name                <input ng-model="menuCtrl.firstname" type="text"  style="color:black !important"
+                              name="firstname"
+                              required
+                               minlength="4"                          >
+                            <!-- //  {{ menuCtrl.firstname }} -->
+                              <span
+                                ng-if="(signupForm.firstname.$error.required || signupForm.firstname.$error.minlength) && signupForm.firstname.$touched">
+                                First Name must be at least 4 characters long.
+                              </span>
+
+                              <br/>
+  Last Name                 <input ng-model="menuCtrl.lastname" type="text" style="color:black !important"
+                            name="lastname"
+                            required
+                             minlength="4"                      >
+                          <!-- //  {{ menuCtrl.lastname }} -->
+                            <span
+                              ng-if="(signupForm.lastname.$error.required || signupForm.lastname.$error.minlength) && signupForm.lastname.$touched">
+                              Last Name must be at least 4 characters long.
+                            </span> <br/>
+  Email                     <input ng-model="menuCtrl.email" type="email" style="color:black !important"
+                                name="email"
+                                required                              >
+                            <!-- //    {{ menuCtrl.email }} -->
+                                <span
+                                  ng-if="(signupForm.email.$invalid) && signupForm.email.$touched">
+                                  Must be a valid email address: handle@domain format
+                                </span>
+                               <br/>
+  Phone                     <input ng-model="menuCtrl.phone" type="text" style="color:black !important"
+                                  name="phone"
+                                  required
+                                  pattern="(\d{3})-(\d{3})-(\d{4})">
+
+                              <!-- //    {{ menuCtrl.phone }} -->
+                                  <span
+                                    ng-if="(signupForm.phone.$invalid) && signupForm.phone.$touched">
+                                    Phone must be in the format ###-###-####.
+                                  </span>
+
+   <br/>
+  Menu Number               <input ng-model="menuCtrl.menunumber" type="text" style="color:black !important"
+                              name="menunumber"
+                              required                              >
+                              <!-- //{{ menuCtrl.menunumber }} -->
+                              <span
+                                ng-if="(signupForm.menunumber.$error.required) &&
+                                signupForm.menunumber.$touched &&
+                                menuCtrl.isValidMenuNumber()">
+                                A valid menunumber is required
+                              </span>
+
+<br/><br/>
+
+      <button ng-click="menuCtrl.signup()" class="btn btn-primary"
+      ng-disabled="signupForm.$invalid"
+      >Sign Up</button>
+</br>
+      Form valid? {{ signupForm.$valid }}
+    <!-- </div> -->
+    <span
+      ng-if="menuCtrl.confirmSave"><br/>
+      Your information has been saved.
+    </span>
+
+    <!-- <span
+      ng-if="signupForm.$valid && menuCtrl.isMenuNumberInvalid"><br/>
+      No such menu number exists.
+    </span -->
+
+
+  </form>
+</div>
